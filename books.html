@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Page</title>
+    <script src="https://unpkg.com/realm-web@1.2.0/dist/bundle.iife.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="data.js"></script>
+    <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="Semantic-UI-CSS-master/semantic.min.js"></script>
+</head>
+<body>
+<div class="ui left demo vertical inverted sidebar labeled icon menu">
+    <a class="item" href="index.html">
+        <i class="home icon"></i>
+        Home Page
+    </a>
+    <a class="item" href="books.html">
+        <i class="book icon"></i>
+        Books Page
+    </a>
+    <a class="item" id = "user_page_icon" href="user.html">
+        <i class="user circle icon"></i>
+        User Page
+    </a>
+</div>
+<div class="pusher">
+    <button class="ui icon button">
+        <i class="big bars icon" onclick="openSideBar()"></i>
+    </button>
+    <h1 class="ui header orange" style="text-align: center">
+        <i class="big book icon" style="alignment: center"></i>
+        Book Page
+    </h1>
+    <h5>
+        (Note: Table is loading slow because of loading images.)
+    </h5>
+    <table class="ui red celled table" id="book_table" style="visibility: hidden">
+        <thead>
+        <tr>
+            <th>Book Name</th>
+            <th>Author(s)</th>
+            <th>Translator (if any)</th>
+            <th>Editor (if any)</th>
+            <th>Cover</th>
+            <th>Publisher</th>
+            <th>Genre (if any)</th>
+            <th>Published Year</th>
+            <th>Average Rating</th>
+            <th>All Reviews</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        get_books();
+    </script>
+</div>
+</body>
+</html>

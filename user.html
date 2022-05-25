@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+    <script src="https://unpkg.com/realm-web@1.2.0/dist/bundle.iife.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="data.js"></script>
+    <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="Semantic-UI-CSS-master/semantic.min.js"></script>
+</head>
+<body>
+<div class="ui left demo vertical inverted sidebar labeled icon menu">
+    <a class="item" href="index.html">
+        <i class="home icon"></i>
+        Home Page
+    </a>
+    <a class="item" href="books.html">
+        <i class="book icon"></i>
+        Books Page
+    </a>
+    <a class="item" href="user.html">
+        <i class="user circle icon"></i>
+        User Page
+    </a>
+</div>
+<div class="pusher">
+    <button class="ui icon button">
+        <i class="big bars icon" onclick="openSideBar()"></i>
+    </button>
+    <h1 class="ui header orange" style="text-align: center">
+        <i class="user circle icon" style="alignment: center"></i>
+        User Page
+    </h1>
+    <div style="text-align: left; font-size: x-large " class="ui header purple" id="user_username"></div>
+    <table class="ui red celled table" id="user_table" style="visibility: hidden">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Number of Books Read</th>
+            <th>Favorite Books</th>
+            <th>Average Rating</th>
+            <th>Reviews</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <button class="ui labeled icon button" id="button_action" onclick="openActions()"
+            style="background-color: #0ea432; visibility: hidden">
+        <i class="big edit icon"></i>
+        Show Actions
+    </button>
+    <table class="ui red celled table" id="book_table_action" style="visibility: hidden">
+        <thead>
+        <tr>
+            <th>Book Name</th>
+            <th>Author(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        if (localStorage.getItem('username') === '') {
+            $('#user_username').append("LOGIN FIRST")
+        } else {
+            $('#user_username').append("<i class=\"user circle icon\"></i> User: " + localStorage.getItem('username'))
+            document.getElementById("user_table").style.visibility = "visible";
+            document.getElementById("button_action").style.visibility = "visible";
+            fillUserTable();
+        }
+    </script>
+</div>
+<script>
+    $('.ui.dropdown.selection').dropdown();
+</script>
+</body>
+</html>

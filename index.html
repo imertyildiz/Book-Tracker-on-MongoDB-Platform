@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <script src="https://unpkg.com/realm-web@1.2.0/dist/bundle.iife.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="data.js"></script>
+    <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="Semantic-UI-CSS-master/semantic.min.js"></script>
+</head>
+<body>
+<div class="ui left demo vertical inverted sidebar labeled icon menu">
+    <a class="item" href="index.html">
+        <i class="home icon"></i>
+        Home Page
+    </a>
+    <a class="item" href="books.html">
+        <i class="book icon"></i>
+        Book Page
+    </a>
+    <a class="item" id="user_page_icon" href="user.html">
+        <i class="user circle icon"></i>
+        User Page
+    </a>
+</div>
+<div class="pusher">
+
+    <button class="ui icon button">
+        <i class="big bars icon" onclick="openSideBar()"></i>
+    </button>
+    <h1 class="ui header purple" style="text-align: center">
+        <i class="big book icon" style="alignment: center"></i>
+        Book Tracker
+    </h1>
+    <div class="ui sub header purple" style="text-align: center">Best Tracking Platform</div>
+    <br>
+    <div style="text-align: left; font-size: x-large " class="ui header purple" id="username_div"></div>
+    <br>
+    <button class="ui labeled icon button" style="background-color: #28e822" onclick="open_add_book_form()">
+        <i class="plus icon"></i>
+        Add Book
+    </button>
+    <button style="background-color: #bcefbc; visibility: hidden " class="mini ui labeled icon button"
+            id="add_book_button"
+            onclick="add_author()">
+        <i class="plus circle icon"></i>
+        Add Author
+    </button>
+    <br><br>
+
+    <form onsubmit="return false" class="ui equal width form" style="visibility: hidden" id="add_book_form">
+        <div class="fields" id="first_book_fields">
+            <div class="field">
+                <label>Book Name</label>
+                <input type="text" name="name" placeholder="Book Name">
+            </div>
+            <div class="field" id="checkbox_translation">
+                <label>Is a Book Translation</label>
+                <div class="ui checked checkbox">
+                    <input type="checkbox" name="checkbox_translation" oninput="do_checkbox_translation()">
+                    <label>Yes</label>
+                </div>
+            </div>
+            <div class="disabled field" id="translator">
+                <label>Translator</label>
+                <input type="text" name="translator" placeholder="Translator">
+            </div>
+            <div class="field">
+                <label>Author
+                </label>
+                <input type="text" name="author" placeholder="Author">
+            </div>
+        </div>
+        <div class="fields">
+            <div class="field" id="checkbox_editor">
+                <label>Does Book have Editor</label>
+                <div class="ui checked checkbox">
+                    <input type="checkbox" name="checkbox_editor" oninput="do_checkbox_editor()">
+                    <label>Yes</label>
+                </div>
+            </div>
+            <div class="disabled field" id="editor">
+                <label>Editor</label>
+                <input type="text" name="editor" placeholder="Editor">
+            </div>
+            <div class="field" id="cover">
+                <label>Cover</label>
+                <input type="text" name="cover" placeholder="Cover">
+            </div>
+            <div class="field" id="checkbox_fiction">
+                <label>Is a Book Fiction</label>
+                <div class="ui checked checkbox">
+                    <input type="checkbox" name="checkbox_fiction" oninput="do_checkbox_genre()">
+                    <label>Yes</label>
+                </div>
+            </div>
+        </div>
+        <div class="fields">
+            <div class="field" id="publisher">
+                <label>Publisher</label>
+                <input type="text" name="publisher" placeholder="publisher">
+            </div>
+            <div class="disabled field" id="genre">
+                <label>Genre</label>
+                <div class="ui dropdown selection">
+                    <input type="hidden" name="genre">
+                    <div class="default text">Select Genre</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <div class="item" data-value="Horror">Horror</div>
+                        <div class="item" data-value="Crime">Crime</div>
+                        <div class="item" data-value="Romance">Romance</div>
+                        <div class="item" data-value="Thriller">Thriller</div>
+                        <div class="item" data-value="Poetry">Poetry</div>
+                        <div class="item" data-value="Mystery">Mystery</div>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>Published Year</label>
+                <div class="ui dropdown selection">
+                    <input type="hidden" name="year_published">
+                    <div class="default text">Select Published Year</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <div class="item" data-value="2022">2022</div>
+                        <div class="item" data-value="2021">2021</div>
+                        <div class="item" data-value="2020">2020</div>
+                        <div class="item" data-value="2019">2019</div>
+                        <div class="item" data-value="2018">2018</div>
+                        <div class="item" data-value="2017">2017</div>
+                        <div class="item" data-value="2016">2016</div>
+                        <div class="item" data-value="2015">2015</div>
+                        <div class="item" data-value="2014">2014</div>
+                        <div class="item" data-value="2013">2013</div>
+                        <div class="item" data-value="2012">2012</div>
+                        <div class="item" data-value="2011">2011</div>
+                        <div class="item" data-value="2010">2010</div>
+                        <div class="item" data-value="2009">2009</div>
+                        <div class="item" data-value="2008">2008</div>
+                        <div class="item" data-value="2007">2007</div>
+                        <div class="item" data-value="2006">2006</div>
+                        <div class="item" data-value="2005">2005</div>
+                        <div class="item" data-value="2004">2004</div>
+                        <div class="item" data-value="2003">2003</div>
+                        <div class="item" data-value="2002">2002</div>
+                        <div class="item" data-value="2001">2001</div>
+                        <div class="item" data-value="2000">2000</div>
+                        <div class="item" data-value="1999">1999</div>
+                        <div class="item" data-value="1998">1998</div>
+                        <div class="item" data-value="1997">1997</div>
+                        <div class="item" data-value="1996">1996</div>
+                        <div class="item" data-value="1995">1995</div>
+                        <div class="item" data-value="1994">1994</div>
+                        <div class="item" data-value="1993">1993</div>
+                        <div class="item" data-value="1992">1992</div>
+                        <div class="item" data-value="1991">1991</div>
+                        <div class="item" data-value="1990">1990</div>
+                        <div class="item" data-value="1989">1989</div>
+                        <div class="item" data-value="1988">1988</div>
+                        <div class="item" data-value="1987">1987</div>
+                        <div class="item" data-value="1986">1986</div>
+                        <div class="item" data-value="1985">1985</div>
+                        <div class="item" data-value="1984">1984</div>
+                        <div class="item" data-value="1983">1983</div>
+                        <div class="item" data-value="1982">1982</div>
+                        <div class="item" data-value="1981">1981</div>
+                        <div class="item" data-value="1980">1980</div>
+                        <div class="item" data-value="1979">1979</div>
+                        <div class="item" data-value="1978">1978</div>
+                        <div class="item" data-value="1977">1977</div>
+                        <div class="item" data-value="1976">1976</div>
+                        <div class="item" data-value="1975">1975</div>
+                        <div class="item" data-value="1974">1974</div>
+                        <div class="item" data-value="1973">1973</div>
+                        <div class="item" data-value="1972">1972</div>
+                        <div class="item" data-value="1971">1971</div>
+                        <div class="item" data-value="1970">1970</div>
+                        <div class="item" data-value="1969">1969</div>
+                        <div class="item" data-value="1968">1968</div>
+                        <div class="item" data-value="1967">1967</div>
+                        <div class="item" data-value="1966">1966</div>
+                        <div class="item" data-value="1965">1965</div>
+                        <div class="item" data-value="1964">1964</div>
+                        <div class="item" data-value="1963">1963</div>
+                        <div class="item" data-value="1962">1962</div>
+                        <div class="item" data-value="1961">1961</div>
+                        <div class="item" data-value="1960">1960</div>
+                        <div class="item" data-value="1959">1959</div>
+                        <div class="item" data-value="1958">1958</div>
+                        <div class="item" data-value="1957">1957</div>
+                        <div class="item" data-value="1956">1956</div>
+                        <div class="item" data-value="1955">1955</div>
+                        <div class="item" data-value="1954">1954</div>
+                        <div class="item" data-value="1953">1953</div>
+                        <div class="item" data-value="1952">1952</div>
+                        <div class="item" data-value="1951">1951</div>
+                        <div class="item" data-value="1950">1950</div>
+                        <div class="item" data-value="1949">1949</div>
+                        <div class="item" data-value="1948">1948</div>
+                        <div class="item" data-value="1947">1947</div>
+                        <div class="item" data-value="1946">1946</div>
+                        <div class="item" data-value="1945">1945</div>
+                        <div class="item" data-value="1944">1944</div>
+                        <div class="item" data-value="1943">1943</div>
+                        <div class="item" data-value="1942">1942</div>
+                        <div class="item" data-value="1941">1941</div>
+                        <div class="item" data-value="1940">1940</div>
+                        <div class="item" data-value="1939">1939</div>
+                        <div class="item" data-value="1938">1938</div>
+                        <div class="item" data-value="1937">1937</div>
+                        <div class="item" data-value="1936">1936</div>
+                        <div class="item" data-value="1935">1935</div>
+                        <div class="item" data-value="1934">1934</div>
+                        <div class="item" data-value="1933">1933</div>
+                        <div class="item" data-value="1932">1932</div>
+                        <div class="item" data-value="1931">1931</div>
+                        <div class="item" data-value="1930">1930</div>
+                        <div class="item" data-value="1929">1929</div>
+                        <div class="item" data-value="1928">1928</div>
+                        <div class="item" data-value="1927">1927</div>
+                        <div class="item" data-value="1926">1926</div>
+                        <div class="item" data-value="1925">1925</div>
+                        <div class="item" data-value="1924">1924</div>
+                        <div class="item" data-value="1923">1923</div>
+                        <div class="item" data-value="1922">1922</div>
+                        <div class="item" data-value="1921">1921</div>
+                        <div class="item" data-value="1920">1920</div>
+                        <div class="item" data-value="1919">1919</div>
+                        <div class="item" data-value="1918">1918</div>
+                        <div class="item" data-value="1917">1917</div>
+                        <div class="item" data-value="1916">1916</div>
+                        <div class="item" data-value="1915">1915</div>
+                        <div class="item" data-value="1914">1914</div>
+                        <div class="item" data-value="1913">1913</div>
+                        <div class="item" data-value="1912">1912</div>
+                        <div class="item" data-value="1911">1911</div>
+                        <div class="item" data-value="1910">1910</div>
+                        <div class="item" data-value="1909">1909</div>
+                        <div class="item" data-value="1908">1908</div>
+                        <div class="item" data-value="1907">1907</div>
+                        <div class="item" data-value="1906">1906</div>
+                        <div class="item" data-value="1905">1905</div>
+                        <div class="item" data-value="1904">1904</div>
+                        <div class="item" data-value="1903">1903</div>
+                        <div class="item" data-value="1902">1902</div>
+                        <div class="item" data-value="1901">1901</div>
+                        <div class="item" data-value="1900">1900</div>
+                        <div class="item" data-value="1899">1899</div>
+                        <div class="item" data-value="1898">1898</div>
+                        <div class="item" data-value="1897">1897</div>
+                        <div class="item" data-value="1896">1896</div>
+                        <div class="item" data-value="1895">1895</div>
+                        <div class="item" data-value="1894">1894</div>
+                        <div class="item" data-value="1893">1893</div>
+                        <div class="item" data-value="1892">1892</div>
+                        <div class="item" data-value="1891">1891</div>
+                        <div class="item" data-value="1890">1890</div>
+                        <div class="item" data-value="1889">1889</div>
+                        <div class="item" data-value="1888">1888</div>
+                        <div class="item" data-value="1887">1887</div>
+                        <div class="item" data-value="1886">1886</div>
+                        <div class="item" data-value="1885">1885</div>
+                        <div class="item" data-value="1884">1884</div>
+                        <div class="item" data-value="1883">1883</div>
+                        <div class="item" data-value="1882">1882</div>
+                        <div class="item" data-value="1881">1881</div>
+                        <div class="item" data-value="1880">1880</div>
+                        <div class="item" data-value="1879">1879</div>
+                        <div class="item" data-value="1878">1878</div>
+                        <div class="item" data-value="1877">1877</div>
+                        <div class="item" data-value="1876">1876</div>
+                        <div class="item" data-value="1875">1875</div>
+                        <div class="item" data-value="1874">1874</div>
+                        <div class="item" data-value="1873">1873</div>
+                        <div class="item" data-value="1872">1872</div>
+                        <div class="item" data-value="1871">1871</div>
+                        <div class="item" data-value="1870">1870</div>
+                        <div class="item" data-value="1869">1869</div>
+                        <div class="item" data-value="1868">1868</div>
+                        <div class="item" data-value="1867">1867</div>
+                        <div class="item" data-value="1866">1866</div>
+                        <div class="item" data-value="1865">1865</div>
+                        <div class="item" data-value="1864">1864</div>
+                        <div class="item" data-value="1863">1863</div>
+                        <div class="item" data-value="1862">1862</div>
+                        <div class="item" data-value="1861">1861</div>
+                        <div class="item" data-value="1860">1860</div>
+                        <div class="item" data-value="1859">1859</div>
+                        <div class="item" data-value="1858">1858</div>
+                        <div class="item" data-value="1857">1857</div>
+                        <div class="item" data-value="1856">1856</div>
+                        <div class="item" data-value="1855">1855</div>
+                        <div class="item" data-value="1854">1854</div>
+                        <div class="item" data-value="1853">1853</div>
+                        <div class="item" data-value="1852">1852</div>
+                        <div class="item" data-value="1851">1851</div>
+                        <div class="item" data-value="1850">1850</div>
+                        <div class="item" data-value="1849">1849</div>
+                        <div class="item" data-value="1848">1848</div>
+                        <div class="item" data-value="1847">1847</div>
+                        <div class="item" data-value="1846">1846</div>
+                        <div class="item" data-value="1845">1845</div>
+                        <div class="item" data-value="1844">1844</div>
+                        <div class="item" data-value="1843">1843</div>
+                        <div class="item" data-value="1842">1842</div>
+                        <div class="item" data-value="1841">1841</div>
+                        <div class="item" data-value="1840">1840</div>
+                        <div class="item" data-value="1839">1839</div>
+                        <div class="item" data-value="1838">1838</div>
+                        <div class="item" data-value="1837">1837</div>
+                        <div class="item" data-value="1836">1836</div>
+                        <div class="item" data-value="1835">1835</div>
+                        <div class="item" data-value="1834">1834</div>
+                        <div class="item" data-value="1833">1833</div>
+                        <div class="item" data-value="1832">1832</div>
+                        <div class="item" data-value="1831">1831</div>
+                        <div class="item" data-value="1830">1830</div>
+                        <div class="item" data-value="1829">1829</div>
+                        <div class="item" data-value="1828">1828</div>
+                        <div class="item" data-value="1827">1827</div>
+                        <div class="item" data-value="1826">1826</div>
+                        <div class="item" data-value="1825">1825</div>
+                        <div class="item" data-value="1824">1824</div>
+                        <div class="item" data-value="1823">1823</div>
+                        <div class="item" data-value="1822">1822</div>
+                        <div class="item" data-value="1821">1821</div>
+                        <div class="item" data-value="1820">1820</div>
+                        <div class="item" data-value="1819">1819</div>
+                        <div class="item" data-value="1818">1818</div>
+                        <div class="item" data-value="1817">1817</div>
+                        <div class="item" data-value="1816">1816</div>
+                        <div class="item" data-value="1815">1815</div>
+                        <div class="item" data-value="1814">1814</div>
+                        <div class="item" data-value="1813">1813</div>
+                        <div class="item" data-value="1812">1812</div>
+                        <div class="item" data-value="1811">1811</div>
+                        <div class="item" data-value="1810">1810</div>
+                        <div class="item" data-value="1809">1809</div>
+                        <div class="item" data-value="1808">1808</div>
+                        <div class="item" data-value="1807">1807</div>
+                        <div class="item" data-value="1806">1806</div>
+                        <div class="item" data-value="1805">1805</div>
+                        <div class="item" data-value="1804">1804</div>
+                        <div class="item" data-value="1803">1803</div>
+                        <div class="item" data-value="1802">1802</div>
+                        <div class="item" data-value="1801">1801</div>
+                        <div class="item" data-value="1800">1800</div>
+                        <div class="item" data-value="1799">1799</div>
+                        <div class="item" data-value="1798">1798</div>
+                        <div class="item" data-value="1797">1797</div>
+                        <div class="item" data-value="1796">1796</div>
+                        <div class="item" data-value="1795">1795</div>
+                        <div class="item" data-value="1794">1794</div>
+                        <div class="item" data-value="1793">1793</div>
+                        <div class="item" data-value="1792">1792</div>
+                        <div class="item" data-value="1791">1791</div>
+                        <div class="item" data-value="1790">1790</div>
+                        <div class="item" data-value="1789">1789</div>
+                        <div class="item" data-value="1788">1788</div>
+                        <div class="item" data-value="1787">1787</div>
+                        <div class="item" data-value="1786">1786</div>
+                        <div class="item" data-value="1785">1785</div>
+                        <div class="item" data-value="1784">1784</div>
+                        <div class="item" data-value="1783">1783</div>
+                        <div class="item" data-value="1782">1782</div>
+                        <div class="item" data-value="1781">1781</div>
+                        <div class="item" data-value="1780">1780</div>
+                        <div class="item" data-value="1779">1779</div>
+                        <div class="item" data-value="1778">1778</div>
+                        <div class="item" data-value="1777">1777</div>
+                        <div class="item" data-value="1776">1776</div>
+                        <div class="item" data-value="1775">1775</div>
+                        <div class="item" data-value="1774">1774</div>
+                        <div class="item" data-value="1773">1773</div>
+                        <div class="item" data-value="1772">1772</div>
+                        <div class="item" data-value="1771">1771</div>
+                        <div class="item" data-value="1770">1770</div>
+                        <div class="item" data-value="1769">1769</div>
+                        <div class="item" data-value="1768">1768</div>
+                        <div class="item" data-value="1767">1767</div>
+                        <div class="item" data-value="1766">1766</div>
+                        <div class="item" data-value="1765">1765</div>
+                        <div class="item" data-value="1764">1764</div>
+                        <div class="item" data-value="1763">1763</div>
+                        <div class="item" data-value="1762">1762</div>
+                        <div class="item" data-value="1761">1761</div>
+                        <div class="item" data-value="1760">1760</div>
+                        <div class="item" data-value="1759">1759</div>
+                        <div class="item" data-value="1758">1758</div>
+                        <div class="item" data-value="1757">1757</div>
+                        <div class="item" data-value="1756">1756</div>
+                        <div class="item" data-value="1755">1755</div>
+                        <div class="item" data-value="1754">1754</div>
+                        <div class="item" data-value="1753">1753</div>
+                        <div class="item" data-value="1752">1752</div>
+                        <div class="item" data-value="1751">1751</div>
+                        <div class="item" data-value="1750">1750</div>
+                        <div class="item" data-value="1749">1749</div>
+                        <div class="item" data-value="1748">1748</div>
+                        <div class="item" data-value="1747">1747</div>
+                        <div class="item" data-value="1746">1746</div>
+                        <div class="item" data-value="1745">1745</div>
+                        <div class="item" data-value="1744">1744</div>
+                        <div class="item" data-value="1743">1743</div>
+                        <div class="item" data-value="1742">1742</div>
+                        <div class="item" data-value="1741">1741</div>
+                        <div class="item" data-value="1740">1740</div>
+                        <div class="item" data-value="1739">1739</div>
+                        <div class="item" data-value="1738">1738</div>
+                        <div class="item" data-value="1737">1737</div>
+                        <div class="item" data-value="1736">1736</div>
+                        <div class="item" data-value="1735">1735</div>
+                        <div class="item" data-value="1734">1734</div>
+                        <div class="item" data-value="1733">1733</div>
+                        <div class="item" data-value="1732">1732</div>
+                        <div class="item" data-value="1731">1731</div>
+                        <div class="item" data-value="1730">1730</div>
+                        <div class="item" data-value="1729">1729</div>
+                        <div class="item" data-value="1728">1728</div>
+                        <div class="item" data-value="1727">1727</div>
+                        <div class="item" data-value="1726">1726</div>
+                        <div class="item" data-value="1725">1725</div>
+                        <div class="item" data-value="1724">1724</div>
+                        <div class="item" data-value="1723">1723</div>
+                        <div class="item" data-value="1722">1722</div>
+                        <div class="item" data-value="1721">1721</div>
+                        <div class="item" data-value="1720">1720</div>
+                        <div class="item" data-value="1719">1719</div>
+                        <div class="item" data-value="1718">1718</div>
+                        <div class="item" data-value="1717">1717</div>
+                        <div class="item" data-value="1716">1716</div>
+                        <div class="item" data-value="1715">1715</div>
+                        <div class="item" data-value="1714">1714</div>
+                        <div class="item" data-value="1713">1713</div>
+                        <div class="item" data-value="1712">1712</div>
+                        <div class="item" data-value="1711">1711</div>
+                        <div class="item" data-value="1710">1710</div>
+                        <div class="item" data-value="1709">1709</div>
+                        <div class="item" data-value="1708">1708</div>
+                        <div class="item" data-value="1707">1707</div>
+                        <div class="item" data-value="1706">1706</div>
+                        <div class="item" data-value="1705">1705</div>
+                        <div class="item" data-value="1704">1704</div>
+                        <div class="item" data-value="1703">1703</div>
+                        <div class="item" data-value="1702">1702</div>
+                        <div class="item" data-value="1701">1701</div>
+                        <div class="item" data-value="1700">1700</div>
+                        <div class="item" data-value="1699">1699</div>
+                        <div class="item" data-value="1698">1698</div>
+                        <div class="item" data-value="1697">1697</div>
+                        <div class="item" data-value="1696">1696</div>
+                        <div class="item" data-value="1695">1695</div>
+                        <div class="item" data-value="1694">1694</div>
+                        <div class="item" data-value="1693">1693</div>
+                        <div class="item" data-value="1692">1692</div>
+                        <div class="item" data-value="1691">1691</div>
+                        <div class="item" data-value="1690">1690</div>
+                        <div class="item" data-value="1689">1689</div>
+                        <div class="item" data-value="1688">1688</div>
+                        <div class="item" data-value="1687">1687</div>
+                        <div class="item" data-value="1686">1686</div>
+                        <div class="item" data-value="1685">1685</div>
+                        <div class="item" data-value="1684">1684</div>
+                        <div class="item" data-value="1683">1683</div>
+                        <div class="item" data-value="1682">1682</div>
+                        <div class="item" data-value="1681">1681</div>
+                        <div class="item" data-value="1680">1680</div>
+                        <div class="item" data-value="1679">1679</div>
+                        <div class="item" data-value="1678">1678</div>
+                        <div class="item" data-value="1677">1677</div>
+                        <div class="item" data-value="1676">1676</div>
+                        <div class="item" data-value="1675">1675</div>
+                        <div class="item" data-value="1674">1674</div>
+                        <div class="item" data-value="1673">1673</div>
+                        <div class="item" data-value="1672">1672</div>
+                        <div class="item" data-value="1671">1671</div>
+                        <div class="item" data-value="1670">1670</div>
+                        <div class="item" data-value="1669">1669</div>
+                        <div class="item" data-value="1668">1668</div>
+                        <div class="item" data-value="1667">1667</div>
+                        <div class="item" data-value="1666">1666</div>
+                        <div class="item" data-value="1665">1665</div>
+                        <div class="item" data-value="1664">1664</div>
+                        <div class="item" data-value="1663">1663</div>
+                        <div class="item" data-value="1662">1662</div>
+                        <div class="item" data-value="1661">1661</div>
+                        <div class="item" data-value="1660">1660</div>
+                        <div class="item" data-value="1659">1659</div>
+                        <div class="item" data-value="1658">1658</div>
+                        <div class="item" data-value="1657">1657</div>
+                        <div class="item" data-value="1656">1656</div>
+                        <div class="item" data-value="1655">1655</div>
+                        <div class="item" data-value="1654">1654</div>
+                        <div class="item" data-value="1653">1653</div>
+                        <div class="item" data-value="1652">1652</div>
+                        <div class="item" data-value="1651">1651</div>
+                        <div class="item" data-value="1650">1650</div>
+                        <div class="item" data-value="1649">1649</div>
+                        <div class="item" data-value="1648">1648</div>
+                        <div class="item" data-value="1647">1647</div>
+                        <div class="item" data-value="1646">1646</div>
+                        <div class="item" data-value="1645">1645</div>
+                        <div class="item" data-value="1644">1644</div>
+                        <div class="item" data-value="1643">1643</div>
+                        <div class="item" data-value="1642">1642</div>
+                        <div class="item" data-value="1641">1641</div>
+                        <div class="item" data-value="1640">1640</div>
+                        <div class="item" data-value="1639">1639</div>
+                        <div class="item" data-value="1638">1638</div>
+                        <div class="item" data-value="1637">1637</div>
+                        <div class="item" data-value="1636">1636</div>
+                        <div class="item" data-value="1635">1635</div>
+                        <div class="item" data-value="1634">1634</div>
+                        <div class="item" data-value="1633">1633</div>
+                        <div class="item" data-value="1632">1632</div>
+                        <div class="item" data-value="1631">1631</div>
+                        <div class="item" data-value="1630">1630</div>
+                        <div class="item" data-value="1629">1629</div>
+                        <div class="item" data-value="1628">1628</div>
+                        <div class="item" data-value="1627">1627</div>
+                        <div class="item" data-value="1626">1626</div>
+                        <div class="item" data-value="1625">1625</div>
+                        <div class="item" data-value="1624">1624</div>
+                        <div class="item" data-value="1623">1623</div>
+                        <div class="item" data-value="1622">1622</div>
+                        <div class="item" data-value="1621">1621</div>
+                        <div class="item" data-value="1620">1620</div>
+                        <div class="item" data-value="1619">1619</div>
+                        <div class="item" data-value="1618">1618</div>
+                        <div class="item" data-value="1617">1617</div>
+                        <div class="item" data-value="1616">1616</div>
+                        <div class="item" data-value="1615">1615</div>
+                        <div class="item" data-value="1614">1614</div>
+                        <div class="item" data-value="1613">1613</div>
+                        <div class="item" data-value="1612">1612</div>
+                        <div class="item" data-value="1611">1611</div>
+                        <div class="item" data-value="1610">1610</div>
+                        <div class="item" data-value="1609">1609</div>
+                        <div class="item" data-value="1608">1608</div>
+                        <div class="item" data-value="1607">1607</div>
+                        <div class="item" data-value="1606">1606</div>
+                        <div class="item" data-value="1605">1605</div>
+                        <div class="item" data-value="1604">1604</div>
+                        <div class="item" data-value="1603">1603</div>
+                        <div class="item" data-value="1602">1602</div>
+                        <div class="item" data-value="1601">1601</div>
+                        <div class="item" data-value="1600">1600</div>
+                        <div class="item" data-value="1599">1599</div>
+                        <div class="item" data-value="1598">1598</div>
+                        <div class="item" data-value="1597">1597</div>
+                        <div class="item" data-value="1596">1596</div>
+                        <div class="item" data-value="1595">1595</div>
+                        <div class="item" data-value="1594">1594</div>
+                        <div class="item" data-value="1593">1593</div>
+                        <div class="item" data-value="1592">1592</div>
+                        <div class="item" data-value="1591">1591</div>
+                        <div class="item" data-value="1590">1590</div>
+                        <div class="item" data-value="1589">1589</div>
+                        <div class="item" data-value="1588">1588</div>
+                        <div class="item" data-value="1587">1587</div>
+                        <div class="item" data-value="1586">1586</div>
+                        <div class="item" data-value="1585">1585</div>
+                        <div class="item" data-value="1584">1584</div>
+                        <div class="item" data-value="1583">1583</div>
+                        <div class="item" data-value="1582">1582</div>
+                        <div class="item" data-value="1581">1581</div>
+                        <div class="item" data-value="1580">1580</div>
+                        <div class="item" data-value="1579">1579</div>
+                        <div class="item" data-value="1578">1578</div>
+                        <div class="item" data-value="1577">1577</div>
+                        <div class="item" data-value="1576">1576</div>
+                        <div class="item" data-value="1575">1575</div>
+                        <div class="item" data-value="1574">1574</div>
+                        <div class="item" data-value="1573">1573</div>
+                        <div class="item" data-value="1572">1572</div>
+                        <div class="item" data-value="1571">1571</div>
+                        <div class="item" data-value="1570">1570</div>
+                        <div class="item" data-value="1569">1569</div>
+                        <div class="item" data-value="1568">1568</div>
+                        <div class="item" data-value="1567">1567</div>
+                        <div class="item" data-value="1566">1566</div>
+                        <div class="item" data-value="1565">1565</div>
+                        <div class="item" data-value="1564">1564</div>
+                        <div class="item" data-value="1563">1563</div>
+                        <div class="item" data-value="1562">1562</div>
+                        <div class="item" data-value="1561">1561</div>
+                        <div class="item" data-value="1560">1560</div>
+                        <div class="item" data-value="1559">1559</div>
+                        <div class="item" data-value="1558">1558</div>
+                        <div class="item" data-value="1557">1557</div>
+                        <div class="item" data-value="1556">1556</div>
+                        <div class="item" data-value="1555">1555</div>
+                        <div class="item" data-value="1554">1554</div>
+                        <div class="item" data-value="1553">1553</div>
+                        <div class="item" data-value="1552">1552</div>
+                        <div class="item" data-value="1551">1551</div>
+                        <div class="item" data-value="1550">1550</div>
+                        <div class="item" data-value="1549">1549</div>
+                        <div class="item" data-value="1548">1548</div>
+                        <div class="item" data-value="1547">1547</div>
+                        <div class="item" data-value="1546">1546</div>
+                        <div class="item" data-value="1545">1545</div>
+                        <div class="item" data-value="1544">1544</div>
+                        <div class="item" data-value="1543">1543</div>
+                        <div class="item" data-value="1542">1542</div>
+                        <div class="item" data-value="1541">1541</div>
+                        <div class="item" data-value="1540">1540</div>
+                        <div class="item" data-value="1539">1539</div>
+                        <div class="item" data-value="1538">1538</div>
+                        <div class="item" data-value="1537">1537</div>
+                        <div class="item" data-value="1536">1536</div>
+                        <div class="item" data-value="1535">1535</div>
+                        <div class="item" data-value="1534">1534</div>
+                        <div class="item" data-value="1533">1533</div>
+                        <div class="item" data-value="1532">1532</div>
+                        <div class="item" data-value="1531">1531</div>
+                        <div class="item" data-value="1530">1530</div>
+                        <div class="item" data-value="1529">1529</div>
+                        <div class="item" data-value="1528">1528</div>
+                        <div class="item" data-value="1527">1527</div>
+                        <div class="item" data-value="1526">1526</div>
+                        <div class="item" data-value="1525">1525</div>
+                        <div class="item" data-value="1524">1524</div>
+                        <div class="item" data-value="1523">1523</div>
+                        <div class="item" data-value="1522">1522</div>
+                        <div class="item" data-value="1521">1521</div>
+                        <div class="item" data-value="1520">1520</div>
+                        <div class="item" data-value="1519">1519</div>
+                        <div class="item" data-value="1518">1518</div>
+                        <div class="item" data-value="1517">1517</div>
+                        <div class="item" data-value="1516">1516</div>
+                        <div class="item" data-value="1515">1515</div>
+                        <div class="item" data-value="1514">1514</div>
+                        <div class="item" data-value="1513">1513</div>
+                        <div class="item" data-value="1512">1512</div>
+                        <div class="item" data-value="1511">1511</div>
+                        <div class="item" data-value="1510">1510</div>
+                        <div class="item" data-value="1509">1509</div>
+                        <div class="item" data-value="1508">1508</div>
+                        <div class="item" data-value="1507">1507</div>
+                        <div class="item" data-value="1506">1506</div>
+                        <div class="item" data-value="1505">1505</div>
+                        <div class="item" data-value="1504">1504</div>
+                        <div class="item" data-value="1503">1503</div>
+                        <div class="item" data-value="1502">1502</div>
+                        <div class="item" data-value="1501">1501</div>
+                        <div class="item" data-value="1500">1500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="ui button" onclick="submit_book()">Add Book</button>
+    </form>
+    <br><br>
+
+    <button class="ui labeled icon button" style="background-color: #fc381e" onclick="delete_book_main()">
+        <i class="minus icon"></i>
+        Delete Book
+    </button>
+    <br>
+    <br>
+    <table class="ui red celled table" id="delete_book_table" style="visibility: hidden">
+        <thead>
+        <tr>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <br>
+    <button class="ui labeled icon button" style="background-color: #28e822" onclick="open_add_user_form()">
+        <i class="plus icon"></i>
+        Add User
+    </button>
+    <button class="ui labeled icon button" style="background-color: #3b6be7" onclick="open_login_user_form()">
+        <i class="plus icon"></i>
+        Login
+    </button>
+    <br>
+    <br><br>
+
+    <form onsubmit="return false" class="ui equal width form" style="visibility: hidden" id="add_user_form">
+        <div class="fields" id="first_user_fields">
+            <div class="field">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username">
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password">
+            </div>
+        </div>
+        <button class="ui button" id="user_submit_button" onclick="submit_user()">Submit</button>
+    </form>
+    <br>
+    <br>
+    <button class="ui labeled icon button" style="background-color: #fc381e" onclick="delete_user_main()">
+        <i class="minus icon"></i>
+        Delete User
+    </button>
+    <br>
+    <br>
+    <table class="ui red celled table" id="delete_user_table" style="visibility: hidden">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <br>
+    <script>
+        $('.ui.dropdown.selection').dropdown();
+    </script>
+    <script>
+        $('#add_book_form').form({
+            fields: {
+                name: 'empty',
+                author: 'empty',
+                publisher: 'empty',
+                cover: 'empty',
+                year_published: 'empty',
+            }
+        });
+        $('#add_user_form').form({
+            fields: {
+                username: 'empty',
+                password: 'empty',
+            }
+        });
+        if ($('#username_div')[0].innerText === "") {
+            localStorage.setItem('username', '')
+        }
+    </script>
+</div>
+</body>
+</html>
